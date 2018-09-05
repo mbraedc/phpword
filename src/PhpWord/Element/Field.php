@@ -82,6 +82,10 @@ class Field extends AbstractElement
             'properties' => array('StyleIdentifier' => ''),
             'options'    => array('PreserveFormat'),
         ),
+        'REF' => array(
+            'properties' => array(),
+            'options'    => array('PreserveFormat'),
+        ),
     );
 
     /**
