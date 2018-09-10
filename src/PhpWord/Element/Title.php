@@ -47,6 +47,13 @@ class Title extends AbstractElement
     private $style;
 
     /**
+     * Bookmark name
+     *
+     * @var string
+     */
+    private $bookmark;
+
+    /**
      * Is part of collection
      *
      * @var bool
@@ -58,8 +65,9 @@ class Title extends AbstractElement
      *
      * @param string|TextRun $text
      * @param int $depth
+     * @param string $bookmark
      */
-    public function __construct($text, $depth = 1)
+    public function __construct($text, $depth = 1, $bookmark = null)
     {
         if (is_string($text)) {
             $this->text = CommonText::toUTF8($text);
@@ -74,6 +82,8 @@ class Title extends AbstractElement
         if (array_key_exists($styleName, Style::getStyles())) {
             $this->style = str_replace('_', '', $styleName);
         }
+
+        $this->bookmark = $bookmark;
     }
 
     /**
@@ -104,5 +114,15 @@ class Title extends AbstractElement
     public function getStyle()
     {
         return $this->style;
+    }
+
+    /**
+     * Get bookmark
+     *
+     * @return string
+     */
+    public function getBookmark()
+    {
+        return $this->bookmark;
     }
 }

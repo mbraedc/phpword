@@ -48,13 +48,23 @@ class Title extends AbstractElement
         }
 
         $bookmarkRId = null;
+        if ($element->getBookmark()) {
+            $bookmarkRId = $element->getPhpWord()->addBookmark();
+
+            $xmlWriter->startElement('w:bookmarkStart');
+            $xmlWriter->writeAttribute('w:id', $bookmarkRId);
+            $xmlWriter->writeAttribute('w:name', $element->getBookmark());
+            $xmlWriter->endElement();
+        }
+
+        $tocBookmarkRId = null;
         if ($element->getDepth() !== 0) {
             $rId = $element->getRelationId();
-            $bookmarkRId = $element->getPhpWord()->addBookmark();
+            $tocBookmarkRId = $element->getPhpWord()->addBookmark();
 
             // Bookmark start for TOC
             $xmlWriter->startElement('w:bookmarkStart');
-            $xmlWriter->writeAttribute('w:id', $bookmarkRId);
+            $xmlWriter->writeAttribute('w:id', $tocBookmarkRId);
             $xmlWriter->writeAttribute('w:name', "_Toc{$rId}");
             $xmlWriter->endElement(); //w:bookmarkStart
         }
@@ -75,9 +85,16 @@ class Title extends AbstractElement
         if ($element->getDepth() !== 0) {
             // Bookmark end
             $xmlWriter->startElement('w:bookmarkEnd');
-            $xmlWriter->writeAttribute('w:id', $bookmarkRId);
+            $xmlWriter->writeAttribute('w:id', $tocBookmarkRId);
             $xmlWriter->endElement(); //w:bookmarkEnd
         }
+
+        if ($element->getBookmark()) {
+            $xmlWriter->startElement('w:bookmarkEnd');
+            $xmlWriter->writeAttribute('w:id', $bookmarkRId);
+            $xmlWriter->endElement();
+        }
+
         $xmlWriter->endElement(); //w:p
     }
 }
