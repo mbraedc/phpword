@@ -44,13 +44,21 @@ class ListItemRun extends TextRun
     private $depth;
 
     /**
+     * ListItem bookmark
+     *
+     * @var string
+     */
+    private $bookmark;
+
+    /**
      * Create a new ListItem
      *
      * @param int $depth
      * @param array|string|null $listStyle
      * @param mixed $paragraphStyle
+     * @param string $bookmark
      */
-    public function __construct($depth = 0, $listStyle = null, $paragraphStyle = null)
+    public function __construct($depth = 0, $listStyle = null, $paragraphStyle = null, $bookmark = null)
     {
         $this->depth = $depth;
 
@@ -60,6 +68,9 @@ class ListItemRun extends TextRun
         } else {
             $this->style = $this->setNewStyle(new ListItemStyle(), $listStyle, true);
         }
+
+        $this->bookmark = $bookmark;
+
         parent::__construct($paragraphStyle);
     }
 
@@ -81,5 +92,15 @@ class ListItemRun extends TextRun
     public function getDepth()
     {
         return $this->depth;
+    }
+
+    /**
+     * Get ListItem bookmark.
+     *
+     * @return string
+     */
+    public function getBookmark()
+    {
+        return $this->bookmark;
     }
 }

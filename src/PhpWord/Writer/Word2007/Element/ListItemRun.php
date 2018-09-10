@@ -56,8 +56,25 @@ class ListItemRun extends AbstractElement
 
         $xmlWriter->endElement(); // w:pPr
 
+        $bookmarkRId = null;
+
+        if ($element->getBookmark()) {
+            $bookmarkRId = $element->getPhpWord()->addBookmark();
+
+            $xmlWriter->startElement('w:bookmarkStart');
+            $xmlWriter->writeAttribute('w:id', $bookmarkRId);
+            $xmlWriter->writeAttribute('w:name', $element->getBookmark());
+            $xmlWriter->endElement(); // w:bookmarkStart
+        }
+
         $containerWriter = new Container($xmlWriter, $element);
         $containerWriter->write();
+
+         if ($element->getBookmark()) {
+            $xmlWriter->startElement('w:bookmarkEnd');
+            $xmlWriter->writeAttribute('w:id', $bookmarkRId);
+            $xmlWriter->endElement(); // w:bookmarkEnd
+        }
 
         $xmlWriter->endElement(); // w:p
     }
