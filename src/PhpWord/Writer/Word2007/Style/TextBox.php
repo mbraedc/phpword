@@ -58,4 +58,14 @@ class TextBox extends Frame
         $xmlWriter->writeAttributeIf($style->getBorderColor() !== null, 'color', $style->getBorderColor());
         $xmlWriter->endElement(); // v:stroke
     }
+
+    public function writeFill() {
+        $style = $this->getStyle();
+        if (!$style instanceof TextBoxStyle || !$style->getFillColor()) {
+            return;
+        }
+
+        $xmlWriter = $this->getXmlWriter();
+        $xmlWriter->writeAttribute('fillcolor', $style->getFillColor());
+    }
 }
