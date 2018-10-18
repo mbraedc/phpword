@@ -237,7 +237,7 @@ class Styles extends AbstractPart
     {
         $xmlWriter->startElement('w:style');
         $xmlWriter->writeAttribute('w:type', 'paragraph');
-        $xmlWriter->writeAttribute('w:customStyle', '1');
+        $xmlWriter->writeAttribute('w:customStyle', '0');
         $xmlWriter->writeAttribute('w:styleId', $styleName);
         $xmlWriter->startElement('w:name');
         $xmlWriter->writeAttribute('w:val', $styleName);
