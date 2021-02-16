@@ -61,11 +61,16 @@ class TextBox extends Frame
 
     public function writeFill() {
         $style = $this->getStyle();
-        if (!$style instanceof TextBoxStyle || !$style->getFillColor()) {
+        if (!$style instanceof TextBoxStyle) {
             return;
         }
 
         $xmlWriter = $this->getXmlWriter();
-        $xmlWriter->writeAttribute('fillcolor', $style->getFillColor());
+
+        if (!$style->getFillColor()) {
+            $xmlWriter->writeAttribute('filled', 'f');
+        } else {
+            $xmlWriter->writeAttribute('fillcolor', $style->getFillColor());
+        }
     }
 }
