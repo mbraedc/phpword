@@ -17,7 +17,7 @@
 
 namespace PhpOffice\PhpWord\Element;
 
-use PhpOffice\Common\Text as CommonText;
+use PhpOffice\PhpWord\Shared\Text as SharedText;
 use PhpOffice\PhpWord\Style;
 
 /**
@@ -70,7 +70,7 @@ class Title extends AbstractElement
     public function __construct($text, $depth = 1, $bookmark = null)
     {
         if (is_string($text)) {
-            $this->text = CommonText::toUTF8($text);
+            $this->text = SharedText::toUTF8($text);
         } elseif ($text instanceof TextRun) {
             $this->text = $text;
         } else {
