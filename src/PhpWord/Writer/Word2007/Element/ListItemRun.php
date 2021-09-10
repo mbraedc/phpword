@@ -48,9 +48,6 @@ class ListItemRun extends AbstractElement
 
         $this->writeParagraphProperties($element);
 
-        $containerWriter = new Container($xmlWriter, $element);
-        $containerWriter->write();
-
         $bookmarkRId = null;
 
         if ($element->getBookmark()) {
